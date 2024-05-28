@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer">
+        <t t-set="_canSelectRecord" t-value="canSelectRecord" />
+        <div
+            class="o_timeline_grid_renderer o_renderer"
+            t-att-class="uniqueRendererClass"
+            t-att-style="getStyle"
+            tabindex="-1"
+            t-ref="root"
+        >
+            <t t-if="showNoContentHelper" t-call="web.ActionHelper">
+                <t t-set="noContentHelp" t-value="props.noContentHelp" />
+            </t>
+            <t t-call="{{ constructor.headerTemplate }}" />
+        </div>
+    </t>
+
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.Header">
+        <div
+            class="o_timeline_grid_header o_timeline_grid_header_scale position-sticky top-0 d-flex flex-wrap bg-100"
+        >
+            <div class="d-flex gap-2 align-items-center w-100 px-3 py-2 bg-100">
+                <div
+                    t-ref="actionContainer"
+                    class="o_timeline_grid_action_buttons"
+                    t-if="!env.isSmall"
+                />
+            </div>
+            <b
+                class="o_timeline_grid_title o_timeline_grid_row_sidebar d-flex align-items-center justify-content-center p-2"
+            >
+                Rooms
+            </b>
+            <div
+                class="o_timeline_grid_header_slots o_timeline_grid_grid_columns flex-grow-1 bg-view fw-bold"
+            >
+                <t t-foreach="props.model.columns" t-as="column" t-key="column.index">
+                    <div
+                        class="o_timeline_grid_header_cell d-flex flex-column align-items-center justify-content-center py-2"
+                        t-attf-class="{{column.date.hasSame(props.today, 'day') ? 'o_timeline_grid_today' : ''}}"
+                        t-attf-style="grid-column:{{column.column}}"
+                    >
+                        <div t-out="column.date.day" />
+                        <div t-out="column.date.weekdayShort" />
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.Rows" />
+
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.RecordRow" />
+
+</templates>

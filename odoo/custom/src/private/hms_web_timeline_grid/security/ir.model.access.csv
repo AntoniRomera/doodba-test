@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+"access_pms_reservation","access.pms.reservation","model_pms_reservation","",1,1,1,1
+"access_pms_reservation_room","access.pms.reservation.room","model_pms_reservation_room","",1,1,1,1
+"access_pms_room","access.pms.room","model_pms_room","",1,1,1,1

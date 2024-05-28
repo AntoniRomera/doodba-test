@@ -1,0 +1,10 @@
+# OCA
+web:
+  - "*"
+---
+# MS
+ENV:
+  DEFAULT_REPO_PATTERN: https://github.com/Mallorcasoft/{}.git
+  ODOO_VERSION: 17
+hms-web:
+  - "*"

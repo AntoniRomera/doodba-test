@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_pms_reservation_timelinegrid" model="ir.ui.view">
+        <field name="name">pms.reservation.timelinegrid</field>
+        <field name="model">pms.reservation</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <timelineGrid>
+                <field name="name" />
+                <field name="room_ids" />
+            </timelineGrid>
+        </field>
+    </record>
+    <record id="action_timeline_grid" model="ir.actions.act_window">
+        <field name="name">Scheduler</field>
+        <field name="res_model">pms.reservation</field>
+        <field name="view_mode">timelineGrid</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'timelineGrid', 'view_id': ref('view_pms_reservation_timelinegrid')}),
+        ]"
+        />
+    </record>
+</odoo>
