@@ -5,9 +5,17 @@
         <field name="model">pms.reservation</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <timelineGrid>
-                <field name="name" />
-                <field name="room_ids" />
+            <timelineGrid date_start="room_ids.date_from" date_end="room_ids.date_to">
+                <row field_name="room_ids.room_id" model_name="pms.room" />
+                <templates>
+                    <t t-name="timelinegrid-row-box">
+                        <field name="name" />
+                        <field name="holder_id" />
+                        <div>
+                            <h1><field name="holder_id" /></h1>
+                        </div>
+                    </t>
+                </templates>
             </timelineGrid>
         </field>
     </record>

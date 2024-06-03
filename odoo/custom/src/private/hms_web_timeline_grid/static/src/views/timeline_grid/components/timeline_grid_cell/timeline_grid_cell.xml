@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="hms_web_timeline_grid.TimelineGridCell">
+        <t t-if="props.header">
+            <t t-call="{{ constructor.headerTemplate }}" />
+        </t>
+        <t t-else="">
+            <t t-call="{{ constructor.normalTemplate }}" />
+        </t>
+    </t>
+
+    <t t-name="hms_web_timeline_grid.TimelineGridCell.Normal">
+        <div
+            class="o_timeline_grid_cell o_group_open"
+            t-attf-class="{{props.today ? 'o_timeline_grid_today' : ''}} {{ props.hoverable ? 'o_timeline_grid_hoverable' : ''}}"
+            t-attf-style="grid-column:{{props.column}} / span 1;grid-row:{{props.row}} / span 9; {{ props.weekend ? ' background-color:var(--Timeline_grid__DayOff-background-color)' : ''}}"
+            t-att-data-column-index="props.index"
+        />
+    </t>
+
+    <t t-name="hms_web_timeline_grid.TimelineGridCell.Header">
+        <div
+            class="o_timeline_grid_row_header o_timeline_grid_row_sidebar position-relative align-items-center o_timeline_grid_hoverable o_group_open"
+            t-attf-style="grid-row: {{props.row}} / span {{props.row_span}}"
+            t-att-data-row-id="props.id"
+        >
+            <div
+                class="o_timeline_grid_row_title d-flex align-items-center h-100 w-100 pe-1"
+                t-attf-style="grid-column: {{props.column}} / {{props.column_span}}"
+                t-att-title="props.text"
+            >
+                    <span class="text-truncate w-0 flex-grow-1" t-out="props.text" />
+            </div>
+        </div>
+    </t>
+</templates>

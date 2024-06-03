@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="hms_web_timeline_grid.TimelineGridRowColumn">
+        <div
+            class="o_timeline_grid_cells o_timeline_grid_grid_rows o_timeline_grid_grid_columns position-relative"
+        >
+            <t t-slot="default" />
+        </div>
+    </t>
+</templates>

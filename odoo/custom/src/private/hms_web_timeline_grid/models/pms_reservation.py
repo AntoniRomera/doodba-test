@@ -13,6 +13,7 @@ class Reservation(models.Model):
     arrival_date = fields.Date()
     departure_date = fields.Date()
 
+    holder_id = fields.Many2one("res.partner")
     room_ids = fields.One2many("pms.reservation.room", "reservation_id")
 
 

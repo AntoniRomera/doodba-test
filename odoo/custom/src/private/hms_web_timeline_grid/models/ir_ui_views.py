@@ -13,6 +13,11 @@ class View(models.Model):
         ondelete={"timelineGrid": "cascade"},
     )
 
+    def _is_qweb_based_view(self, view_type):
+        qweb_base_view = super()._is_qweb_based_view(view_type)
+
+        return qweb_base_view or view_type in ("timelineGrid")
+
 
 class IrActionsActWindowView(models.Model):
     _inherit = "ir.actions.act_window.view"

@@ -1,10 +1,11 @@
 /** @odoo-module **/
 
-import {deserializeDateTime} from "@web/core/l10n/dates";
-import {localization} from "@web/core/l10n/localization";
 import {KeepLast} from "@web/core/utils/concurrency";
 import {Model} from "@web/model/model";
+
+import {deserializeDateTime} from "@web/core/l10n/dates";
 import {extractFieldsFromArchInfo} from "@web/model/relational_model/utils";
+import {localization} from "@web/core/l10n/localization";
 
 const {Interval, DateTime} = luxon;
 
@@ -77,6 +78,8 @@ export class TimelineGridModel extends Model {
     }
     /**
      * @protected
+     * @param {Object} data .
+     * @returns null
      */
     async updateData(data) {
         // If (data.hasCreateRight === null) {
@@ -115,6 +118,7 @@ export class TimelineGridModel extends Model {
     }
     /**
      * @protected
+     * @returns {Object} start, end, columns
      */
     computeRange() {
         const {date} = this.config;
@@ -139,9 +143,10 @@ export class TimelineGridModel extends Model {
         const columns = [];
         for (const process_date of Object.entries(Object.assign({}, dates))) {
             columns.push({
-                index: parseInt(process_date[0]),
-                column: parseInt(process_date[0]) + 1,
+                index: parseInt(process_date[0], 10),
+                column: parseInt(process_date[0], 10) + 1,
                 date: process_date[1],
+                weekend: [5, 6, 7].includes(process_date[1].weekday),
             });
         }
 

@@ -13,6 +13,17 @@
                 <t t-set="noContentHelp" t-value="props.noContentHelp" />
             </t>
             <t t-call="{{ constructor.headerTemplate }}" />
+            <TimelineGridRowHeader>
+                <t t-set-slot="default">
+                    <t t-call="{{ constructor.rowHeaderTemplate }}" />
+                </t>
+            </TimelineGridRowHeader>
+            <TimelineGridRowColumn>
+                <t t-set-slot="default">
+                    <t t-call="{{ constructor.rowTemplate }}" />
+                    <t t-call="{{ constructor.recordRowTemplate }}" />
+                </t>
+            </TimelineGridRowColumn>
         </div>
     </t>
 
@@ -49,8 +60,45 @@
         </div>
     </t>
 
-    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.Rows" />
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.RowHeader">
+        <t
+            t-foreach="[{id: 0, row: 1, title: 'Test'}, {id: 1, row: 10, title: 'Test 2'}, {id: 2, row: 19, title: 'Test 3'}, {id: 3, row: 28, title: 'Test 4'}]"
+            t-as="resource"
+            t-key="resource.id"
+        >
+            <TimelineGridCell
+                row="resource.row"
+                row_span="9"
+                column="2"
+                column_span="-1"
+                header="true"
+                text="resource.title"
+            />
+        </t>
+    </t>
 
-    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.RecordRow" />
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.Rows">
+        <t
+            t-foreach="[{id: 0, row: 1, title: 'Test'}, {id: 1, row: 10, title: 'Test 2'}, {id: 2, row: 19, title: 'Test 3'}, {id: 3, row: 28, title: 'Test 4'}]"
+            t-as="resource"
+            t-key="resource.id"
+        >
+            <t t-foreach="props.model.columns" t-as="column" t-key="column.index">
+                <TimelineGridCell
+                    row="resource.row"
+                    row_span="9"
+                    header="false"
+                    column="column.column"
+                    column_span="1"
+                    hoverable="true"
+                    today="column.date.hasSame(props.today, 'day')"
+                    weekend="column.weekend"
+                />
+            </t>
+        </t>
+    </t>
+
+    <t t-name="hms_web_timeline_grid.TimelineGridRenderer.RecordRow">
+    </t>
 
 </templates>
